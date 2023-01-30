@@ -1,0 +1,14 @@
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=1059
+#include <bits/stdc++.h> 
+using namespace std;
+int main(){
+    int arr[7];
+    for (int i = 0; i < 7; i++){
+        cin >> arr[i];
+    }
+    //get all values and sort them
+    sort(arr, arr+7);
+    cout << arr[0] << " " << arr[1] << " " <<arr[6]-arr[0]-arr[1];
+    //a and b are smallest values, a+b+c is the largest, subtract a and b to get c
+    return 0;
+}
