@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+int area(int ax1, int ax2, int ay1, int ay2){
+  int area1 = abs(ax1 - ax2) * abs(ay1 - ay2);
+  return area1;
+}
+int main() {
+  int ax1,ax2,ay1,ay2;
+  int bx1,bx2,by1,by2;
+  freopen("billboard.in", "r", stdin);
+  freopen("billboard.out", "w", stdout);
+  cin >> ax1 >> ay1 >> ax2 >> ay2;
+  //     Left   Down   Right  Up
+  cin >> bx1 >> by1 >> bx2 >> by2;
+  if(bx2 >= ax2 && ax1 >= bx1 && by2 >= ay2 && ay1 >= by1){
+    cout << 0;
+  }
+  else if(bx2 >= ax2 && ax1 >= bx1){
+    if(by2 <= ay2 <= by1){
+      cout << abs(ay1-by1)*abs(ax1 - ax2);
+    }
+    else if(by2 <= ay1 <= by1){
+      cout << abs(ay2-by2)*abs(ax1 - ax2);
+    }
+    else{
+      cout << area(ax1,ax2,ay1,ay2);
+    }
+  }
+  else if (by2 >= ay2 && ay1 >= by1){
+    if(bx2 >= ax2 && ax2 >= bx1){
+      cout << abs(ax1-bx1)*abs(ay1 - ay2);
+    }
+    else if(bx2 >= ax1 >= bx1){
+      cout << abs(ax2-bx2)*abs(ay1 - ay2);
+    }
+    else{
+      cout << "C";
+      cout << area(ax1,ax2,ay1,ay2);
+    }
+  }
+  else{
+    cout << area(ax1,ax2,ay1,ay2);
+  }
+  return 0;
+}
