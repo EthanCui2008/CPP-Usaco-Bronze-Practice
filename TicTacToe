@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool equal(char a, char b, char c){
+  if(a==b&&b==c&&c==a){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+bool twoequal(char a, char b, char c){
+  if(a!=b&&b!=c&&c!=a){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+int main() {
+  freopen("tttt.in", "r", stdin);
+	freopen("tttt.out", "w", stdout);
+  string board[3];
+  set<char> ones;
+  set<string> twos;
+  for(int i = 0; i < 3; i++){
+    cin >> board[i];
+  }
+  for(int i = 0; i < 3; i++){
+    if(equal(board[i][0],board[i][1],board[i][2])){
+      ones.insert(board[i][0]);
+    }
+    else if(twoequal(board[i][0],board[i][1],board[i][2])){
+      set<char> two; two.insert(board[i][0]); two.insert(board[i][1]); two.insert(board[i][2]);
+      string twoes;
+      for (auto itr : two){
+        twoes = twoes + itr;
+      } 
+      twos.insert(twoes);
+    }
+    if(equal(board[0][i],board[1][i],board[2][i])){
+      ones.insert(board[0][i]);
+    }
+    else if(twoequal(board[0][i],board[1][i],board[2][i])){
+      set<char> two; two.insert(board[0][i]); two.insert(board[1][i]); two.insert(board[2][i]);
+      string twoes;
+      for (auto itr : two){
+        twoes = twoes + itr;
+      } 
+      twos.insert(twoes);
+    }
+  }
+  if(equal(board[0][0],board[1][1],board[2][2])){
+    ones.insert(board[0][0]);
+  }
+  else if(twoequal(board[0][0],board[1][1],board[2][2])){
+    set<char> two; two.insert(board[0][0]); two.insert(board[1][1]); two.insert(board[2][2]);
+    string twoes;
+    for (auto itr : two){
+      twoes = twoes + itr;
+    } 
+    twos.insert(twoes);
+  }
+  if(equal(board[0][2],board[1][1],board[2][0])){
+    ones.insert(board[0][2]);
+  }
+  else if(twoequal(board[0][2],board[1][1],board[2][0])){
+    set<char> two; two.insert(board[0][2]); two.insert(board[1][1]); two.insert(board[2][0]);
+    string twoes;
+    for (auto itr : two){
+      twoes = twoes + itr;
+    } 
+    twos.insert(twoes);
+  }
+  cout << ones.size() << "\n" << twos.size();
+  return 0;
+}
+
