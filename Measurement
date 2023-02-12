@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct cow{
+    int order;
+    int strength;
+    string name;
+
+};
+int main() {
+    freopen ("measurement.in","r",stdin); freopen ("measurement.out","w",stdout);
+    long n; cin >> n;
+    cow cowlist[n];
+    map<string,int> cows = {{"Bessie", 0},{"Mildred", 1},{ "Elsie", 2}};
+    string cowsuwu[3] = {"Bessie","Mildred","Elsie"};
+    int arr[3] = {7,7,7};
+    int ans = 0;
+    for(int i= 0; i < n; i++){
+        cow input;
+        cin >> input.order;
+        cin >> input.name;
+        cin >> input.strength;
+        cowlist[i] = input;
+    }
+    sort( cowlist, cowlist+n, 
+        []( const cow& a, const cow&b ){
+        return a.order < b.order;
+    } );
+    set<string> a = {"Bessie","Mildred","Elsie"};
+    set<string> b = {};
+    for(int i = 0; i < n; i++){
+        b = {};
+        arr[cows[cowlist[i].name]] += cowlist[i].strength;
+        int maxa = max(arr[0],max(arr[1],arr[2]));
+        for(int j = 0; j < 3; j++){
+            if(arr[j] == maxa){
+                b.insert(cowsuwu[j]);
+            }
+        }
+        if(a!=b){
+            ans++;
+        }
+        a = b;
+    }
+    cout << ans;
+    return 0;
+}
