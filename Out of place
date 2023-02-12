@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+  freopen("outofplace.in", "r", stdin);
+  freopen("outofplace.out", "w", stdout);
+  int n; cin >> n;
+  int arr[n];
+  int sorted[n];
+  for(int i = 0; i < n; i++){
+    cin >> arr[i]; sorted[i] = arr[i];
+  }
+  sort(sorted, sorted+n);
+  int prev = -1;
+  int discount = 0;
+  int total = 0;
+  for(int i = 0; i < n; i++){
+    if(arr[i] != sorted[i]){
+      total++;
+      if(arr[i] == prev){
+        discount++;
+      }
+      else{
+        total-=discount;
+        prev = arr[i];
+      }
+    }
+  }
+  cout << total-1;
+  return 0;
+}
+
