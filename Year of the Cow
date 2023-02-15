@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(void){
+  int n; cin >> n;
+  map<string,int> birthday;
+  string years[12] = {"Monkey", "Rooster", "Dog", "Pig", "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat"};
+  birthday["Bessie"] = 2021;
+  string cowa, relat, year, bruh, cowb;
+  for (int i = 0; i < n; i++) {
+    cin >> cowa >> bruh >> bruh >> relat >> year >> bruh >> bruh >> cowb;
+    int a = birthday[cowb];
+    int target; for(int i = 0; i < 12; i++){ if(years[i] == year){ target = i; } }
+    while(true){
+        if(relat == "previous"){
+            a--;
+        }
+        else{
+            a++;
+        }
+        if((a%12) == target){
+            break;
+        }
+    }
+    birthday[cowa] = a;
+  }
+  cout << abs(birthday["Bessie"]-birthday["Elsie"]);
+  return 0;
+}
