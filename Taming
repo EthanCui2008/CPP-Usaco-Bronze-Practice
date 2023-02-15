@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+  freopen ("taming.in","r",stdin); freopen ("taming.out","w",stdout);
+  int n; cin >> n;
+  int input[n];
+  int lisat[n];
+  
+  for(int i = 0; i < n; i++){
+    cin >> input[i];
+    lisat[i] = -1; 
+  }
+  bool tru = true;
+  lisat[0] = 1;
+  for(int i = 0; i < n; i++){
+    if(input[i] == -1){
+      continue;
+    }
+    if(lisat[i-input[i]] == 0){
+      tru = false;
+    }
+    lisat[i-input[i]] = 1;
+    for(int j = i-input[i]+1; j <= i; j++){
+      if(lisat[j] == 1){
+        tru = false;
+      }
+      lisat[j] = 0;
+    }
+    
+  }
+  int min = 0;
+  int max = 0;
+  for(int i = 0; i < n; i++){
+    if(lisat[i] == 1){
+      min++;
+      max++;
+    }
+    else if(lisat[i] == -1){
+      max++;
+    }
+  }
+  if(tru){
+    cout << min << " " << max;
+  }
+  else{
+    cout << -1;
+  }
+  
+  return 0;
+}
