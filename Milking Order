@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+//basiclly copied from the USACO page modified in my format, here for completion uses.
+bool cowz[100];
+bool used[100];
+int pos[100];
+int n, m, c;
+int order[100];
+int correct[101];
+int usedcorr[101];
+bool works(){
+	for(int i = 0; i < n; i++){
+		cowz[i] = used[i] = 0;
+	}
+	for(int i = 0; i < c; i++){
+		if(cowz[correct[i]] && pos[correct[i]] == correct[i]){
+			continue;
+		}
+		if(cowz[correct[i]]){
+			return 0;
+		}
+		if(used[usedcorr[i]]){
+			return 0;
+		}
+		cowz[correct[i]] = 1;
+		cowz[usedcorr[i]] = 1;
+		pos[correct[i]] = usedcorr[i];
+	}
+	int j = 0;
+	for(int i = 0; i < m; i++){
+		int cow = order[i];
+		if(cowz[cow]){
+			if(j > pos[cow]){ return 0; }
+			j = pos[cow];
+			continue;
+		}
+		while(used[j]){
+			j++;
+			if(j == n)
+				return 0;
+		}
+		used[j] = 1;
+		pos[cow] = j;
+	}
+	return 1;
+}
+int main(){
+	cin >> n >> m >> c;
+	for(int i = 0; i < m; i++){
+		cin >> order[i]; order[i]--;
+	}
+	for(int i = 0; i < c; i++){
+		cin >> correct[i] >> usedcorr[i]; correct[i]--, usedcorr[i]--;
+	}
+	c++;
+	for(int i = 0; i < n; i++){
+		correct[c-1] = 0;
+		usedcorr[c-1] = i;
+		if(works()){ cout << i+1 << '\n'; return 0; }
+	}
+}
+
+
