@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int n; cin >> n;
+    for(int i = 0; i < n; i++){
+        string ann;
+        cin >> ann;
+        string a = "MOO";
+        string b = "MOM";
+        string c = "OOO";
+        string d = "OOM";
+        if (ann.find(a) != string::npos) {
+            cout << ann.size()-3 << endl;
+            continue;
+        }
+        if (ann.find(b) != string::npos) {
+            cout << ann.size()-2<< endl;
+            continue;
+        }
+        if (ann.find(c) != string::npos) {
+            cout << ann.size()-2<< endl;
+            continue;
+        }
+        if (ann.find(d) != string::npos) {
+            cout << ann.size()-1<< endl;
+            continue;
+        }
+        cout << -1<< endl;
+    }
+}
+
