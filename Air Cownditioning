@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+int arr[101]={0};
+long duncan = INT_MAX;
+int spans[10][4];
+void gen(int n, int arrr[], int w){
+    int span[101]= {0};
+    int cost = 0;
+    if (w == n){
+        for(int i = 0; i < n; i++){
+            if(arrr[i] != 0){
+                cost +=spans[i][3];
+                for(int j = spans[i][0]; j <= spans[i][1]; j++){
+                    span[j]+=spans[i][2];
+                }
+            }
+        }
+        for(int i = 0; i < 101; i++){
+            if(span[i]<arr[i]){
+                return;
+            }
+        }
+        if(cost < duncan){
+            duncan = cost;
+        }
+        return;
+    }
+    arrr[w] = 0; gen(n, arrr, w + 1);
+    arrr[w] = 1; gen(n, arrr, w + 1);
+}
+int main(){
+    int n, m; cin >> n >> m;
+    int s,t,c;
+    for(int i = 0; i < n; i++){
+        cin >> s >> t >> c;
+        for(int j = s; j <= t; j++){
+            arr[j]=arr[j]+c;
+        }
+    }
+    for(int i = 0; i < m; i++){
+        cin >> spans[i][0] >> spans[i][1] >> spans[i][2] >>spans[i][3] ;
+    }
+    int balls[m];
+    gen(m, balls ,0);
+    cout << duncan;
+}
